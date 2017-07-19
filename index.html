@@ -6,8 +6,8 @@
   <title>VR Shopping Center</title>
   <meta name="description" content="Tracked Controls – A-Frame">
   <script src="js/aframe-master.min.js"></script>
-  <!--<script src="components/aabb-collider.js"></script>-->
-   <script src="js/aframe-extras.min.js"></script>
+  <script src="js/aabb-collider.js"></script>
+  <script src="js/aframe-extras.min.js"></script>
   <!--<script src="js/grab.js"></script>-->
   <script src="js/ground.js"></script>
   <!--<script src="shaders/skyGradient.js"></script>-->
@@ -20,29 +20,81 @@
       <!-- ... -->
       <img id="groundTexture" src="images/groundfloor.jpg">
       <!-- ... -->
-      <a-mixin id="cube" geometry="primitive: box; height: 0.30; width: 0.30; depth: 0.30" material="color: #EF2D5E;"></a-mixin>
-      <a-mixin id="cube-collided" material="color: #F2E646;"></a-mixin>
-      <a-mixin id="cube-grabbed" material="color: #F2E646;"></a-mixin>
+      
+      <a-mixin id="cube" geometry="primitive: box; height: 0.5; width: 0.5; depth:0.05;" material="src: url(images/drone.jpg); side: double"></a-mixin>
+
+      <a-mixin id="cube2" geometry="primitive: box; height: 0.5; width: 0.5; depth:0.05;" material="src: url(images/official-pi-starterkit.jpg); side: double"></a-mixin>
+      <a-mixin id="cube3" geometry="primitive: box; height: 0.5; width: 0.5; depth:0.05;" material="src: url(images/zero.jpg); side: double"></a-mixin>
+      <!--<a-mixin id="cube-collided" material="color: #F2E646;"></a-mixin>
+      <a-mixin id="cube-grabbed" material="color: #F2E646;"></a-mixin>-->
     </a-assets>
 
-     <!-- Mouse Cursor -->
-    <a-entity id="mycamera" camera="userHeight: 1.6" universal-controls position="5 5 5" jump-ability="distance: 500">
+    <!-- Mouse Cursor -->
+    <a-entity id="mycamera" camera="userHeight: 1.6" universal-controls position="0 1.8 0" jump-ability="distance: 500">
     </a-entity>
 
     <!-- Hands -->
-    <a-entity hand-controls="left" aabb-collider="objects: .cube;" grab></a-entity>
-    <a-entity hand-controls="right" aabb-collider="objects: .cube;" grab></a-entity>
+    <!--<a-entity hand-controls="left" aabb-collider="objects: .cube;" grab></a-entity>-->
+    <a-entity vive-controls="hand: left"></a-entity>
+    <a-entity vive-controls="hand: right"></a-entity>
 
-    
-      <!-- Environment -->
-      <a-entity id="sky" geometry="primitive: sphere; radius: 65;"></a-entity>
-      <!-- ... -->
-      <a-plane src="#groundTexture" rotation="-90 0 0" width="30" height="30"></a-plane>
-      <!-- ... -->
-      <a-entity light="type: point; color: #f4f4f4; intensity: 0.2; distance: 0" position="8 10 18"></a-entity>
-      <a-entity light="type: point; color: #f4f4f4; intensity: 0.6; distance: 0" position="-8 10 -18"></a-entity>
-      <a-entity light="type: ambient; color: #f4f4f4; intensity: 0.4;" position="-8 10 -18"></a-entity>
+
+
+    <!-- Environment -->
+
+    <!--wall-->
+    <a-entity static-body="" geometry="primitive: box; depth:0.5; height: 8; width: 8" position="-5.74 4.088 9.84" rotation="0 0 0"
+      material="color:white;shader: flat; repeat: 6 1;"></a-entity>
+    <a-entity static-body="" geometry="primitive: box; depth:0.5; height: 8; width: 8" position="5.66 4.088 9.73" rotation="0 0 0"
+      material="color:white;shader: flat; repeat: 6 1; "></a-entity>
+    <a-entity static-body="" geometry="primitive: box; depth:0.5; height: 8; width: 20" position="-9.78 4.088 -0.123" rotation="0 90 0"
+      material="color:white;shader: flat; repeat: 6 1; "></a-entity>
+    <a-entity static-body="" geometry="primitive: box; depth:0.5; height: 8; width: 20" position="0.114 4.088 -9.925" rotation="0 0 0"
+      material="color:white;shader: flat; repeat: 6 1;"></a-entity>
+    <a-entity static-body="" geometry="primitive: box; depth:0.5; height: 8; width: 20" position="9.43 4.088 0.001" rotation="0 90 0"
+      material="color:white;shader: flat; repeat: 6 1;"></a-entity>
+
+    <!--products-->
+    <!--<a-entity geometry="primitive: plane; height: 7.5; width: 16" position="0 5 -10" rotation="0 180 0" ></a-entity>-->
+    <a-entity position="0 3 -5">
+      <a-entity class="cube" mixin="cube"></a-entity>
+      <a-entity geometry="primitive: cylinder; height: 0.2; radius: 0.5;" rotation="0 -90 0" position="0 0.5 -0.05" material="color:grey"></a-entity>
+      <a-entity geometry="primitive: cylinder; height: 0.2; radius: 0.5;" rotation="0 -90 0" position="0 -0.5 -0.05" material="color:grey"></a-entity>
+      <a-animation attribute="rotation"
+               dur="10000"
+               fill="forwards"
+               to="0 360 0"
+               repeat="indefinite"></a-animation>
     </a-entity>
+
+     <a-entity position="-3 3 -5">
+      <a-entity class="cube" mixin="cube3"></a-entity>
+      <a-entity geometry="primitive: cylinder; height: 0.2; radius: 0.5;" rotation="0 -90 0" position="0 0.5 -0.05" material="color:grey"></a-entity>
+      <a-entity geometry="primitive: cylinder; height: 0.2; radius: 0.5;" rotation="0 -90 0" position="0 -0.5 -0.05" material="color:grey"></a-entity>
+      <a-animation attribute="rotation"
+               dur="10000"
+               fill="forwards"
+               to="0 360 0"
+               repeat="indefinite"></a-animation>
+    </a-entity>
+
+     <a-entity position="3 3 -5">
+      <a-entity class="cube" mixin="cube2"></a-entity>
+      <a-entity geometry="primitive: cylinder; height: 0.2; radius: 0.5;" rotation="0 -90 0" position="0 0.5 -0.05" material="color:grey"></a-entity>
+      <a-entity geometry="primitive: cylinder; height: 0.2; radius: 0.5;" rotation="0 -90 0" position="0 -0.5 -0.05" material="color:grey"></a-entity>
+      <a-animation attribute="rotation"
+               dur="10000"
+               fill="forwards"
+               to="0 360 0"
+               repeat="indefinite"></a-animation>
+    </a-entity>
+    <!-- ... -->
+    <a-plane src="#groundTexture" rotation="-90 0 0" width="20" height="20"></a-plane>
+    <!-- ... -->
+    <a-entity light="type: point; color: #f4f4f4; intensity: 0.2; distance: 0" position="8 10 18"></a-entity>
+    <a-entity light="type: point; color: #f4f4f4; intensity: 0.6; distance: 0" position="-8 10 -18"></a-entity>
+    <a-entity light="type: ambient; color: #f4f4f4; intensity: 0.4;" position="-8 10 -18"></a-entity>
+
   </a-scene>
 </body>
 
